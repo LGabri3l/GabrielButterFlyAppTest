@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GabrielButterFly.API\GabrielButterFly.API.csproj" />
+    <ProjectReference Include="..\GabrielButterfly.Core\GabrielButterfly.Core.csproj" />
+  </ItemGroup>
+
+</Project>
