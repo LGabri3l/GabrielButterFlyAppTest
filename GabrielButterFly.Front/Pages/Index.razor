@@ -9,11 +9,7 @@
 @inject IMultiplication multiplicationService
 @inject IDivision divisionService
 
-
-
-
 <PageTitle>Index</PageTitle>
-
 
 <EditForm Model="@result">
 
@@ -71,10 +67,9 @@
         </tbody>
     </table>
 
-
 </EditForm>
 
-<!-- Modal -->
+
 
 @code {
 
@@ -82,12 +77,6 @@
 
     int num1,num3,num5,num7;
     int num2,num4,num6,num8;
-
-    //private async Task addition()
-    //{
-    //    result = await additionService.Addition(num1, num2);
-        
-    //}
 
     private async Task addition()
     {
