@@ -20,7 +20,7 @@ namespace GabrielButterfly.Core.Services
             }
             else
             {
-                result.resutl = num1 / num2;
+                result.resultDiv = num1 / num2;
             }
 
             return result;

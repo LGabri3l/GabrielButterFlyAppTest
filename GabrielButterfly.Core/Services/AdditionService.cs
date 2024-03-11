@@ -14,7 +14,7 @@ namespace GabrielButterfly.Core.Services
         {
             Result result = new Result();
 
-            result.resutl = num1 + num2;
+            result.resultAdd = num1 + num2;
 
             return result;
 

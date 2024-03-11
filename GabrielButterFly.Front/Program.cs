@@ -1,6 +1,6 @@
 using GabrielButterfly.Core.Interfaces;
 using GabrielButterfly.Core.Services;
-using GabrielButterFly.Front.Data;
+
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -12,6 +12,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 //builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<IAddition, AdditionService>();
+builder.Services.AddSingleton<ISubtraction, SubtractionService>();
+builder.Services.AddSingleton<IMultiplication, MultiplicationService>();
+builder.Services.AddSingleton<IDivision, DivisionService>();
 
 var app = builder.Build();
 

@@ -1,11 +1,14 @@
 ﻿@page "/"
-@using System.Net.Http.Json
+
 @using GabrielButterfly.Core;
 @using GabrielButterfly.Core.Entities;
 @using GabrielButterfly.Core.Interfaces;
-@using GabrielButterFly.API.Controllers;
-@inject IAddition addition
-@inject HttpClient httpClient
+
+@inject IAddition additionService
+@inject ISubtraction subtractionService
+@inject IMultiplication multiplicationService
+@inject IDivision divisionService
+
 
 
 
@@ -18,92 +21,93 @@
         <thead>
             <tr>
                 <th>First Number</th>
-                <th></th>
+                <th>Operation</th>
                 <th>Second Number</th>
                 <th>Resutl</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                @*<td><input id="num1" /></td>*@
+            <tr>                
                 <td><InputNumber @bind-Value="num1" class="form-control"></InputNumber></td>
                 <th>+</th>
-                <td><InputNumber @bind-Value="num2" class="form-control"></InputNumber></td>
-                <td></td>
-                <td><InputNumber @bind-Value="total" class="form-control"></InputNumber></td>
-                @*<td><input /></td>*@
+                <td><InputNumber @bind-Value="num2" class="form-control"></InputNumber></td>                
+                <td><InputNumber @bind-Value="result.resultAdd" class="form-control"></InputNumber></td>
+                
                 <td>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#resultModal" @onclick="divison">Accept</button>
+                    <button type="button" class="btn btn-primary" @onclick="addition">Accept</button>
                 </td>
             </tr>
             <tr>
-                <td><input type="number" id="num1" /></td>
+                <td><InputNumber @bind-Value="num3" class="form-control"></InputNumber></td>
                 <th>-</th>
-                <td><input type="number" id="num2" /></td>
-               
-               @* <td><InputNumber @bind-Value="result.resutl" placeholder="" class="form-control"></InputNumber></td>*@
+                <td><InputNumber @bind-Value="num4" class="form-control"></InputNumber></td>
+                <td><InputNumber @bind-Value="result.resultSub" class="form-control"></InputNumber></td>
+
                 <td>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" @onclick="divison">Accept</button>
+                    <button type="button" class="btn btn-primary" @onclick="subtraction">Accept</button>
                 </td>
             </tr>
             <tr>
-                <td><input /></td>
+                <td><InputNumber @bind-Value="num5" class="form-control"></InputNumber></td>
                 <th>x</th>
-                <td><input /></td>
-                <td><InputNumber @bind-Value="result.resutl" placeholder="" class="form-control"></InputNumber></td>
+                <td><InputNumber @bind-Value="num6" class="form-control"></InputNumber></td>
+                <td><InputNumber @bind-Value="result.resultMul" class="form-control"></InputNumber></td>
+
                 <td>
-                    <button type="button" class="btn btn-primary">Accept</button>
+                    <button type="button" class="btn btn-primary" @onclick="multiplication">Accept</button>
                 </td>
             </tr>
             <tr>
-                <td><input /></td>
+                <td><InputNumber @bind-Value="num7" class="form-control"></InputNumber></td>
                 <th>÷</th>
-                <td><input /></td>
-                <td><InputNumber @bind-Value="result.resutl" placeholder="" class="form-control"></InputNumber></td>
+                <td><InputNumber @bind-Value="num8" class="form-control"></InputNumber></td>
+                <td><InputNumber @bind-Value="result.resultDiv" class="form-control"></InputNumber></td>
+
                 <td>
-                    <button type="button" class="btn btn-primary">Accept</button>
+                    <button type="button" class="btn btn-primary" @onclick="divison">Accept</button>
                 </td>
             </tr>
         </tbody>
     </table>
 
-    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="resultModal">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <InputNumber @bind-Value="total" class="form-control"></InputNumber>
-            </div>
-            
-        </div>
-    </div>
-</div>
 
 </EditForm>
 
 <!-- Modal -->
 
 @code {
+
     private Result result = new Result();
-    int num1;
-    int num2;
-    int total;
+
+    int num1,num3,num5,num7;
+    int num2,num4,num6,num8;
+
+    //private async Task addition()
+    //{
+    //    result = await additionService.Addition(num1, num2);
+        
+    //}
+
+    private async Task addition()
+    {
+        result = await additionService.Addition(num1, num2);
+    }
+    private async Task subtraction()
+    {
+        result = await subtractionService.Subtraction(num3, num4);
+    }
+
+     private async Task multiplication()
+    {
+        result = await multiplicationService.Multiplication(num5, num6);
+    }
 
     private async Task divison()
     {
-        result = await addition.Addition(num1, num2);
-        total = result.resutl;
-
+        result = await divisionService.Division(num7, num8);
     }
 
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    result = await httpClient.GetFromJsonAsync<Result>($"https://localhost:7235/GabrielButterFly/Addition?num1={num1}&num2={num2}");
-    //}
 }
 
 
