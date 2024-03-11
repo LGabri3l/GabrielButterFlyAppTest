@@ -12,15 +12,23 @@ namespace GabrielButterFly.API.Controllers
 
         public MultiplicationController(IMultiplication multiplication)
         {
-            _multiplication = multiplication;
+            _multiplication = multiplication ?? throw new ArgumentNullException(nameof(multiplication));
         }
 
-        [HttpGet]
+        [HttpGet("Mult")]
 
-        public async Task<IActionResult> GetMultiplicationResult(int num1, int num2)
+        public async Task<IActionResult> GetMultiplicationResult([FromQuery] int num1, [FromQuery] int num2)
         {
-            var result = await _multiplication.Multiplication(num1, num2);
-            return Ok(result);
+            try
+            {
+                var result = await _multiplication.Multiplication(num1, num2);
+                return Ok(result.resultMul);
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
         }
     }
 }

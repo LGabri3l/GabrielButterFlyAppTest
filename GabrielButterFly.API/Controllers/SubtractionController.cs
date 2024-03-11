@@ -12,16 +12,24 @@ namespace GabrielButterFly.API.Controllers
 
         public SubtractionController(ISubtraction subtraction)
         {
-            _subtraction = subtraction;
+            _subtraction = subtraction ?? throw new ArgumentNullException(nameof(subtraction));
         }
 
-        [HttpGet]
+        [HttpGet("Sub")]
 
-        public async Task<IActionResult> GetSubtractionResul(int num1, int num2)
-        {            
-            var result = await _subtraction.Subtraction(num1, num2);
-            return Ok(result);
-                      
+        public async Task<IActionResult> GetSubtractionResul([FromQuery] int num1, [FromQuery] int num2)
+        {
+            try
+            {
+                var result = await _subtraction.Subtraction(num1, num2);
+                return Ok(result.resultSub);
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+
         }
     }
 }
